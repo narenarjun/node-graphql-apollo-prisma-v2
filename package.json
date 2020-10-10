@@ -29,6 +29,7 @@
     "@graphql-tools/graphql-file-loader": "^6.2.4",
     "@graphql-tools/load": "^6.2.4",
     "@graphql-tools/schema": "^6.2.4",
+    "@prisma/client": "^2.8.1",
     "apollo-server": "^2.18.2",
     "env-cmd": "^10.1.0",
     "graphql": "^15.3.0",
