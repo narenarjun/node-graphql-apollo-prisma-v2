@@ -1,10 +1,10 @@
 import { addResolversToSchema } from "@graphql-tools/schema";
 import typedefmade from "./typedefs/typedef";
-import QueryResolvers from './resolvers/queryresolver'
+import mergedResolvers from "./resolvers";
 
 const schemawithtypedefresolver = addResolversToSchema({
   schema: typedefmade,
-  resolvers: QueryResolvers
+  resolvers: mergedResolvers,
 });
 
 export default schemawithtypedefresolver;

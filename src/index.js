@@ -1,4 +1,4 @@
-import { ApolloServer } from "apollo-server";
+import { ApolloServer, PubSub } from "apollo-server";
 import { PrismaClient } from "@prisma/client";
 
 import schemawithtypedefresolver from "./schema";
@@ -7,12 +7,16 @@ const Port = process.env.PORT || 4332;
 
 const prisma = new PrismaClient();
 
+const pubsub = new PubSub();
+
 const server = new ApolloServer({
   schema: schemawithtypedefresolver,
-  context(request) {
+  context: ({ req, connection }) => {
+    const request = { req, connection };
     return {
       prisma,
       request,
+      pubsub,
     };
   },
 });
