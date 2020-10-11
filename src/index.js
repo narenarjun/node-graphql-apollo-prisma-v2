@@ -1,3 +1,4 @@
+import "@babel/polyfill/noConflict";
 import { ApolloServer, PubSub } from "apollo-server";
 import { PrismaClient } from "@prisma/client";
 
