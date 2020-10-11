@@ -19,8 +19,41 @@ const server = new ApolloServer({
       pubsub,
     };
   },
+  // this healthcheck is very useful in liveness & readiness probes in the k8s or any cloud enviroments.
+  onHealthCheck: () => {
+    return new Promise((resolve, reject) => {
+      // Replace the `true` in this conditional with more specific checks!
+      if (true) {
+        resolve();
+      } else {
+        reject();
+      }
+    });
+  },
 });
 
 server.listen({ port: Port }).then(({ url }) => {
   console.log(`Server is running at ${url} 🚀🚀🚀 `);
+  console.log(
+    `Health check is at: ${url}.well-known/apollo/server-health 🏥✅🏥✅`
+  );
+});
+
+//*  graceful shutdown
+const sigs = ["SIGINT", "SIGTERM", "SIGQUIT"];
+sigs.forEach((sig) => {
+  process.on(sig, () => {
+    console.log("SIGTERM signal received: closing HTTP server");
+    console.log("Closing http server.");
+    // ! shutting down apollo-server.
+    server.close(async () => {
+      console.log("HTTP server closed");
+
+      // * shutting and closing connection with prisma and database.
+      await prisma.$disconnect(() => {
+        console.log("prisma database connection closed");
+      });
+      process.exit(0);
+    });
+  });
 });

@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
 
 const getUserId = (request, requireAuth = true) => {
-  console.log(
-    `the value of request sent down to getUserID is :${request}`
-  );
+  // console.log(
+  //   `the value of request sent down to getUserID is :${request}`
+  // );
   const header = request.req
     ? request.req.headers.authorization
     : request.connection.context.Authorization;
