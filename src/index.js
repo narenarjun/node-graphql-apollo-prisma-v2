@@ -1,14 +1,20 @@
 import "@babel/polyfill/noConflict";
-import { ApolloServer, PubSub } from "apollo-server";
+
+import { ApolloServer, PubSub } from "apollo-server-express";
 import { PrismaClient } from "@prisma/client";
+import express from "express";
 
 import schemawithtypedefresolver from "./schema";
 
 const Port = process.env.PORT || 4332;
+const Path = process.env.GRAPHQLPATH ? `/${process.env.GRAPHQLPATH}` : "/wondergraphql";
 
 const prisma = new PrismaClient();
 
 const pubsub = new PubSub();
+
+// ! swapping applymiddleware of express implementation with server.listen to specify the path we want to listen.
+const app = express();
 
 const server = new ApolloServer({
   schema: schemawithtypedefresolver,
@@ -36,10 +42,21 @@ const server = new ApolloServer({
   },
 });
 
-server.listen({ port: Port }).then(({ url }) => {
-  console.log(`Server is running at ${url} 🚀🚀🚀 `);
+server.applyMiddleware({ app, path: Path });
+
+// server.listen({ port: Port }).then(({ url }) => {
+//   console.log(`Server is running at ${url} 🚀🚀🚀 `);
+//   console.log(
+//     `Health check is at: ${url}.well-known/apollo/server-health 🏥✅🏥✅`
+//   );
+// });\
+
+const wonderServer = app.listen({ port: Port }, () => {
   console.log(
-    `Health check is at: ${url}.well-known/apollo/server-health 🏥✅🏥✅`
+    `Server is running at http://localhost:${Port}${server.graphqlPath} 🚀🚀🚀 `
+  );
+  console.log(
+    `Health check is at: http://localhost:${Port}/.well-known/apollo/server-health 🏥✅🏥✅`
   );
 });
 
@@ -50,7 +67,7 @@ sigs.forEach((sig) => {
     console.log("SIGTERM signal received: closing HTTP server");
     console.log("Closing http server.");
     // ! shutting down apollo-server.
-    server.close(async () => {
+    wonderServer.close(async () => {
       console.log("HTTP server closed");
 
       // * shutting and closing connection with prisma and database.
