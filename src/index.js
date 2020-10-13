@@ -20,6 +20,9 @@ const server = new ApolloServer({
       pubsub,
     };
   },
+  // if the NODE_ENV=PRODUCTION, introspection and playground are set to false, this will override them.
+  introspection: true,
+  playground: true,
   // this healthcheck is very useful in liveness & readiness probes in the k8s or any cloud enviroments.
   onHealthCheck: () => {
     return new Promise((resolve, reject) => {
