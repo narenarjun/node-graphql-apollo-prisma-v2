@@ -1,6 +1,6 @@
 # node-graphql-apollo-prisma-v2
 
-This is a fictional blog graphql api. This graphql api is implement an **GraphQL server (SDL-first) with Node.js** with the [Prisma Client](https://www.prisma.io/),[Apollo Server](https://www.apollographql.com/docs/apollo-server/) and [graphql-tools](https://www.graphql-tools.com/). For this blog api, postgresql database is used, you can find the migration details in the [`./prisma/migrations`](./prisma/migrations) folder.
+This is a fictional blog graphql api. This graphql api is implement an **GraphQL server (SDL-first) with Node.js** with the [Prisma Client](https://www.prisma.io/),[Apollo Server](https://www.apollographql.com/docs/apollo-server/) and [graphql-tools](https://www.graphql-tools.com/).
 
 To ease development [babeljs](https://babeljs.io/) is used.
 
