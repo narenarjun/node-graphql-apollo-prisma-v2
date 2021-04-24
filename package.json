@@ -29,7 +29,7 @@
     "@graphql-tools/load": "^6.2.4",
     "@graphql-tools/merge": "^6.2.4",
     "@graphql-tools/schema": "^6.2.4",
-    "@prisma/client": "^2.8.1",
+    "@prisma/client": "^2.21.2",
     "apollo-server": "^2.18.2",
     "apollo-server-express": "^2.18.2",
     "bcryptjs": "^2.4.3",
@@ -40,7 +40,7 @@
     "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
-    "@prisma/cli": "^2.8.1",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "prisma": "^2.21.2"
   }
 }

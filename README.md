@@ -48,27 +48,19 @@ yarn install
 
 Use preferred Database of your choice, for this blog api i have used postgresql. Set the connection uri in the `DATABASE_URL` variable in a `.env` file inside the [`./prisma`](./prisma) folder.
 
-To get set up we use Prisma Migrate. Prisma Migrate is a tool that lets you make changes(schema migrations) to your database e.g. adding columns to existing tables.
+To get set up we use Prisma Migrate. `prisma` cli is a tool that lets you make changes(schema migrations) to your database e.g. adding columns to existing tables.
 
-Mapping our data model to your database schema is a two-step process which involves running two commands:
+Mapping our data model to your database schema :
 
-```
-1>  yarn prisma migrate save --experimental
-
-2>  yarn prisma migrate up --experimental
-```
+```bash
+yarn prisma migrate dev 
 
 ```
- yarn prisma migrate save --experimental
-```
 
-saves a new migration to the [`./prisma/migrations`](./prisma/migrations) in the root folder of your project and updates the `_Migration` table in your database. A new migration is saved every time this command is run complete with its own `README.md` file detailing information about the migration.
+> Note:
+> when using hosted db like heroku, `yarn prisma migrate dev` might fail as it requires the need for creating temporary db which is not possible when using db's from hosted providers, so 
+> we can use the `yarn prisma db push --preview-feature` command.
 
-In order to actually execute the generated migrations, we need to run the second command:
-
-```
-yarn prisma migrate up --experimental
-```
 
 Now, it's time to generate _`Prisma Client`_
 
