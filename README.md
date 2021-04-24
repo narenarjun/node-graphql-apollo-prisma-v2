@@ -4,7 +4,7 @@ This is a fictional blog graphql api. This graphql api is implement an **GraphQL
 
 To ease development [babeljs](https://babeljs.io/) is used.
 
-This apollo-prisma-graphql app is deployed to heroku.[https://prisma2-test-drive.herokuapp.com/](https://prisma2-test-drive.herokuapp.com/)
+This apollo-prisma-graphql app is deployed to heroku.[https://node-prisma-graphql.herokuapp.com/wondergraphql](https://node-prisma-graphql.herokuapp.com/wondergraphql)
 
 ### Few gotchas when deploying apollo server to heroku.
 
@@ -69,6 +69,15 @@ Prisma Client is an auto-generated and type-safe query builder that’s tailored
 ```
 yarn prisma generate
 ```
+
+> ### Note 📚 :
+> with new prisma version, the `prisma generate` command throws a error 
+> ```bash
+> TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received an instance of Object
+> ```
+> To overcome this, the `@prisma/client` and `prisma` should be of the same version. such as `v2.21.2` as of when commiting this message.
+> here is the github issue: [https://github.com/prisma/prisma/issues/6372](https://github.com/prisma/prisma/issues/6372)
+
 
 now , we are all set to start the server.
 
